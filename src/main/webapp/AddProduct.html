@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Add Product | Inventory System</title>
+<style>
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+/* BACKGROUND ANIMATION */
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: linear-gradient(135deg, #0d1124, #1a233a);
+    overflow: hidden;
+}
+
+/* Floating Bokeh Animation */
+body::before,
+body::after {
+    content: "";
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background: rgba(56, 189, 248, 0.18);
+    filter: blur(120px);
+    border-radius: 50%;
+    animation: float 8s infinite alternate ease-in-out;
+}
+
+body::after {
+    right: 10%;
+    bottom: 10%;
+    animation-duration: 10s;
+}
+
+@keyframes float {
+    from { transform: translateY(0); }
+    to { transform: translateY(-40px); }
+}
+
+/* CARD */
+.card {
+    width: 420px;
+    padding: 45px;
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 20px;
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 0 25px rgba(56, 189, 248, 0.2);
+    position: relative;
+
+    animation: popUp 0.9s ease;
+}
+
+@keyframes popUp {
+    from { transform: scale(0.85); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+h2 {
+    text-align: center;
+    font-size: 28px;
+    color: #38bdf8;
+    margin-bottom: 25px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    animation: glowText 2s infinite alternate ease-in-out;
+}
+
+/* Text glow animation */
+@keyframes glowText {
+    from { text-shadow: 0 0 10px #38bdf8; }
+    to { text-shadow: 0 0 25px #38bdf8; }
+}
+
+/* INPUT GROUP */
+.input-group {
+    position: relative;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 13px 15px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.12);
+    outline: none;
+    color: #fff;
+    font-size: 15px;
+
+    transition: all 0.4s ease;
+}
+
+.input-group input:hover {
+    box-shadow: 0 0 15px rgba(56, 189, 248, 0.3);
+}
+
+.input-group input:focus {
+    border-color: #38bdf8;
+    box-shadow: 0 0 18px rgba(56, 189, 248, 0.6);
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* FLOATING LABEL */
+.input-group label {
+    position: absolute;
+    top: 13px;
+    left: 15px;
+    color: #cbd5e1;
+    transition: 0.3s ease;
+    pointer-events: none;
+}
+
+.input-group input:focus + label,
+.input-group input:not(:placeholder-shown) + label {
+    top: -10px;
+    left: 12px;
+    padding: 0 6px;
+    font-size: 12px;
+    color: #38bdf8;
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 3px;
+}
+
+/* SUBMIT BUTTON */
+input[type="submit"] {
+    margin-top: 10px;
+    width: 100%;
+    padding: 13px;
+    border-radius: 12px;
+    border: none;
+    background: linear-gradient(135deg, #0ea5e9, #38bdf8);
+    color: #fff;
+    font-size: 17px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    position: relative;
+    overflow: hidden;
+}
+
+/* Button hover grow */
+input[type="submit"]:hover {
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 0 25px rgba(56, 189, 248, 0.6);
+}
+
+/* RIPPLE EFFECT */
+input[type="submit"]::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+}
+
+input[type="submit"]:active::after {
+    width: 200px;
+    height: 200px;
+    opacity: 0;
+    transition: width 0.4s ease, height 0.4s ease;
+}
+
+/* FOOTER */
+.footer {
+    text-align: center;
+    margin-top: 20px;
+    color: #cbd5e1;
+    font-size: 13px;
+}
+
+</style>
+</head>
+<body>
+    <div class="card">
+        <h2>🛒 Add New Product</h2>
+        <form action="addProduct" method="post">
+            <div class="input-group">
+                <input type="text" name="pcode" id="pcode" placeholder=" " required>
+                <label for="pcode">Product Code</label>
+            </div>
+
+            <div class="input-group">
+                <input type="text" name="pname" id="pname" placeholder=" " required>
+                <label for="pname">Product Name</label>
+            </div>
+
+            <div class="input-group">
+                <input type="text" name="pcompany" id="pcompany" placeholder=" " required>
+                <label for="pcompany">Product Company</label>
+            </div>
+
+            <div class="input-group">
+                <input type="text" name="pprice" id="pprice" placeholder=" " required>
+                <label for="pprice">Product Price</label>
+            </div>
+
+            <div class="input-group">
+                <input type="text" name="pqty" id="pqty" placeholder=" " required>
+                <label for="pqty">Product Quantity</label>
+            </div>
+
+            <input type="submit" value="Add Product">
+        </form>
+        
+    </div>
+</body>
+</html>
